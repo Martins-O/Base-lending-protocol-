@@ -1,0 +1,26 @@
+# Compiler files
+cache/
+out/
+
+# Ignores development broadcast logs
+!/broadcast
+/broadcast/*/31337/
+/broadcast/**/dry-run/
+
+# Dotenv file
+.env
+
+# Node
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Foundry
+lib/forge-std/
+lib/openzeppelin-contracts/
+lib/openzeppelin-contracts-upgradeable/
