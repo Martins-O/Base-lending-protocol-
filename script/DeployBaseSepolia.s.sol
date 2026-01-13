@@ -54,7 +54,15 @@ contract DeployBaseSepolia is Script {
     }
 
     function run() external {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        // Try to read private key - handles both with and without 0x prefix
+        uint256 deployerPrivateKey;
+        try vm.envUint("PRIVATE_KEY") returns (uint256 key) {
+            deployerPrivateKey = key;
+        } catch {
+            // If envUint fails, try reading as bytes32 and converting
+            bytes32 pkBytes = vm.envBytes32("PRIVATE_KEY");
+            deployerPrivateKey = uint256(pkBytes);
+        }
         address deployer = vm.addr(deployerPrivateKey);
 
         console.log("============================================================");
