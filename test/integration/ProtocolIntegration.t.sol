@@ -277,21 +277,21 @@ contract ProtocolIntegrationTest is Test {
         pool.borrow(address(collateralToken), maxBorrow * 98 / 100); // 98% of max
         vm.stopPrank();
 
-        uint256 initialHF = pool.calculateHealthFactor(alice, address(collateralToken));
+        uint256 initialHF = pool.getHealthFactor(alice, address(collateralToken));
         emit log_named_uint("Initial health factor (x100)", initialHF);
         assertGt(initialHF, 100, "Should be healthy");
 
         // Price drops 10%
         priceOracle.setManualPrice(address(collateralToken), 0.9 * 10**18);
 
-        uint256 hfAfterDrop = pool.calculateHealthFactor(alice, address(collateralToken));
+        uint256 hfAfterDrop = pool.getHealthFactor(alice, address(collateralToken));
         emit log_named_uint("HF after 10% drop (x100)", hfAfterDrop);
         assertLt(hfAfterDrop, initialHF, "HF should decrease");
 
         // Price drops another 10%
         priceOracle.setManualPrice(address(collateralToken), 0.8 * 10**18);
 
-        uint256 hfCritical = pool.calculateHealthFactor(alice, address(collateralToken));
+        uint256 hfCritical = pool.getHealthFactor(alice, address(collateralToken));
         emit log_named_uint("HF after 20% drop (x100)", hfCritical);
 
         bool liquidatable = pool.isLiquidatable(alice, address(collateralToken));
