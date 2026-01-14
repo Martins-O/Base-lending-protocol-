@@ -1,6 +1,81 @@
 # Base Credit Lending Protocol
 
-A decentralized lending protocol on Base that uses on-chain credit scoring to offer dynamic collateral ratios (110-200%) based on user behavior and reputation.
+A next-generation decentralized lending protocol built on Base that revolutionizes DeFi lending through **on-chain credit scoring** and **dynamic collateral ratios**. Unlike traditional lending protocols with fixed collateral requirements, this protocol rewards good actors with lower collateralization (down to 110%) while maintaining protocol security.
+
+## 🌟 What Makes This Different?
+
+**Traditional DeFi Lending:**
+- Fixed 150% collateral ratio for everyone
+- No differentiation between trusted and new users
+- Capital inefficient for reliable borrowers
+
+**Base Credit Lending Protocol:**
+- Dynamic 110-200% collateral ratios based on credit score
+- Multi-factor on-chain credit scoring (300-850 range)
+- Up to 82% capital efficiency for trusted users
+- Soulbound Credit NFTs with dynamic visualization
+- ERC-4626 compliant savings vaults with credit boosting
+
+## 📍 Deployed Contracts
+
+### Base Sepolia Testnet
+
+**🎉 LIVE AND VERIFIED!**
+
+**Core Contracts:**
+
+| Contract | Address | Basescan |
+|----------|---------|----------|
+| CreditOracle | `0x6e1b3836c1687dA3cb75dc384A795348F31f48a1` | [View](https://sepolia.basescan.org/address/0x6e1b3836c1687dA3cb75dc384A795348F31f48a1) |
+| PriceOracle | `0xcd0DC85281fdAc4F11cbEEAcffa3e3a011FDb7AE` | [View](https://sepolia.basescan.org/address/0xcd0DC85281fdAc4F11cbEEAcffa3e3a011FDb7AE) |
+| Diamond (NFT) | `0xD0CFb1DA8186F618439F09584328eF49C2b37A64` | [View](https://sepolia.basescan.org/address/0xD0CFb1DA8186F618439F09584328eF49C2b37A64) |
+| LendingPool | `0xcae2A0cDa28Ce54c0f95A13F8816Ec72dBd1C080` | [View](https://sepolia.basescan.org/address/0xcae2A0cDa28Ce54c0f95A13F8816Ec72dBd1C080) |
+
+**Diamond Facets:**
+
+| Facet | Address | Basescan |
+|-------|---------|----------|
+| DiamondCutFacet | `0xF3fb6c464C9f297e54D74AA28DEE1BC1Da0003b3` | [View](https://sepolia.basescan.org/address/0xF3fb6c464C9f297e54D74AA28DEE1BC1Da0003b3) |
+| DiamondLoupeFacet | `0xaB88Cfd8d874bA56fcCED5b3bF8155DEFf0dB40A` | [View](https://sepolia.basescan.org/address/0xaB88Cfd8d874bA56fcCED5b3bF8155DEFf0dB40A) |
+| OwnershipFacet | `0x416cfff03ae71cCFadB8bd62240a8573dA58aA06` | [View](https://sepolia.basescan.org/address/0x416cfff03ae71cCFadB8bd62240a8573dA58aA06) |
+| CreditNFTFacet | `0x19b03d17dEdA66e8c2f5eE9A21A13E7f7431C21b` | [View](https://sepolia.basescan.org/address/0x19b03d17dEdA66e8c2f5eE9A21A13E7f7431C21b) |
+
+**Savings Vaults:**
+
+| Vault | Address | Basescan |
+|-------|---------|----------|
+| USDC Vault | `0x07BcA308853f7a4B83550b43fBE738F981dC6797` | [View](https://sepolia.basescan.org/address/0x07BcA308853f7a4B83550b43fBE738F981dC6797) |
+| WETH Vault | `0x93d86F6869b81D59960932ff059B992e54475AB2` | [View](https://sepolia.basescan.org/address/0x93d86F6869b81D59960932ff059B992e54475AB2) |
+
+**Test Tokens (Faucet Available):**
+
+| Token | Address | Basescan |
+|-------|---------|----------|
+| Test USDC | `0xFD1c775c8792b4F7Cd3Ce47CCeF90eb530619f77` | [View](https://sepolia.basescan.org/address/0xFD1c775c8792b4F7Cd3Ce47CCeF90eb530619f77) |
+| Test WETH | `0xb8E7E3D56986172d430911111C51E065463404A8` | [View](https://sepolia.basescan.org/address/0xb8E7E3D56986172d430911111C51E065463404A8) |
+| Test Collateral | `0xeeF7D4817861156A9eC8Ab282B54884817831a8A` | [View](https://sepolia.basescan.org/address/0xeeF7D4817861156A9eC8Ab282B54884817831a8A) |
+
+**Owner/Admin:** `0x4A78dFC52566063f50F8cf4eD52F513AEB866A0C`
+
+**Test Token Faucet:**
+
+Each test token has a `faucet()` function that mints 1,000 tokens per call. Each user can mint up to 10,000 tokens total.
+
+### Base Mainnet
+
+> Production deployment pending testnet validation.
+
+**Deployment Command:**
+
+```bash
+forge script script/DeployBaseMainnet.s.sol:DeployBaseMainnet \
+  --rpc-url https://mainnet.base.org \
+  --broadcast \
+  --verify \
+  -vvv
+```
+
+**Estimated Gas Cost:** ~$31.50 USD (at 1 gwei gas price)
 
 ## 🎯 Features
 
