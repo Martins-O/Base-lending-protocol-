@@ -60,7 +60,15 @@ contract DeployBaseMainnet is Script {
     }
 
     function run() external {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        // Try to read private key - handles both with and without 0x prefix
+        uint256 deployerPrivateKey;
+        try vm.envUint("PRIVATE_KEY") returns (uint256 key) {
+            deployerPrivateKey = key;
+        } catch {
+            // If envUint fails, try reading as bytes32 and converting
+            bytes32 pkBytes = vm.envBytes32("PRIVATE_KEY");
+            deployerPrivateKey = uint256(pkBytes);
+        }
         address deployer = vm.addr(deployerPrivateKey);
 
         console.log("============================================================");
@@ -147,15 +155,16 @@ contract DeployBaseMainnet is Script {
         });
 
         // CreditNFTFacet
-        bytes4[] memory nftSelectors = new bytes4[](8);
-        nftSelectors[0] = 0x40c10f19; // mint()
-        nftSelectors[1] = 0x6352211e; // ownerOf()
-        nftSelectors[2] = 0x70a08231; // balanceOf()
-        nftSelectors[3] = 0xc87b56dd; // tokenURI()
-        nftSelectors[4] = 0x095ea7b3; // approve()
-        nftSelectors[5] = 0x23b872dd; // transferFrom()
-        nftSelectors[6] = 0xa22cb465; // setApprovalForAll()
-        nftSelectors[7] = 0x01ffc9a7; // supportsInterface()
+        bytes4[] memory nftSelectors = new bytes4[](9);
+        nftSelectors[0] = 0x6990b427; // initializeCreditNFT()
+        nftSelectors[1] = 0x40c10f19; // mint()
+        nftSelectors[2] = 0x6352211e; // ownerOf()
+        nftSelectors[3] = 0x70a08231; // balanceOf()
+        nftSelectors[4] = 0xc87b56dd; // tokenURI()
+        nftSelectors[5] = 0x095ea7b3; // approve()
+        nftSelectors[6] = 0x23b872dd; // transferFrom()
+        nftSelectors[7] = 0xa22cb465; // setApprovalForAll()
+        nftSelectors[8] = 0x01ffc9a7; // supportsInterface()
         cuts[3] = IDiamondCut.FacetCut({
             facetAddress: addrs.creditNFTFacet,
             action: IDiamondCut.FacetCutAction.Add,
